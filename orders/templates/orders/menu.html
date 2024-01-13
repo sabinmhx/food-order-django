@@ -1,0 +1,30 @@
+<!-- orders/templates/orders/menu.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Food Menu</h2>
+        {% if orders %}
+            <p class="mb-4">Items in Cart: {{ orders.count }}</p>
+        {% endif %}
+        <ul class="list-group">
+            {% for food_item in food_items %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ food_item.name }} - Rs. {{ food_item.price }}</span>
+                    <a href="{% url 'add_to_cart' food_item.id %}" class="btn btn-primary">Add to Cart</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr class="my-4">
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'cart' %}" class="btn btn-primary">View Cart</a>
+            <a href="{% url 'orders' %}" class="btn btn-success">View Orders</a>
+        </div>
+    </div>
+</body>
+</html>
